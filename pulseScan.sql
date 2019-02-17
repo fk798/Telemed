@@ -5,7 +5,12 @@ CREATE DATABASE pulseScan;
 USE pulseScan;
 
 CREATE TABLE users (
-	ID PRIMARY KEY INT NOT NULL AUTO_INCREMENT,
+	ID INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
-    fileName INT NOT NULL AUTO_INCREMENT
+    fileName INT NOT NULL,
+    PRIMARY KEY (ID)
 );
+
+use pulseScan;
+
+select * from users;
