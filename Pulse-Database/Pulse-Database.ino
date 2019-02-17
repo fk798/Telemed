@@ -2,18 +2,15 @@
 #include <MySQL_Connection.h>
 #include <MySQL_Cursor.h>
 // MySQL Connection Start ----------------------
-IPAddress server_addr();  // IP of the MySQL *server* here
+IPAddress server_addr(192,168,1,236);  // IP of the MySQL *server* here
 char user[] = "arduino";
 char password[] = "password";
 
 bool stop = false;
 
-// Sample query
-char INSERT_SQL[] = "INSERT INTO pulseScan.users (name, fileName) VALUES ('Faisal', 786)";
-
 // WiFi card example
-char ssid[] = "";         // your SSID
-char pass[] = "";     // your SSID Password
+char ssid[] = "786";         // your SSID
+char pass[] = "SKBKFKFKFK786";     // your SSID Password
 
 WiFiClient client;                 // Use this for WiFi instead of EthernetClient
 MySQL_Connection conn(&client);
@@ -70,6 +67,21 @@ void loop()
       Serial.println("FAILED.");
     
     // create MySQL cursor object
+    String data;
+    for (size_t i = 0; i < 500 - 1; ++i) {
+      data.concat(beats[i]);
+      data.concat(",");
+    }
+    data.concat(beats[499]);
+
+    // Query
+    String sqlStatement = "INSERT INTO pulseScan.users (name, data) VALUES ('Faisal','";
+    sqlStatement.concat(data);
+    sqlStatement.concat("')");
+    Serial.println(sqlStatement);
+    char INSERT_SQL[sqlStatement.length()];
+    sqlStatement.toCharArray(INSERT_SQL, sqlStatement.length() + 1); 
+    Serial.println(INSERT_SQL);
     cursor = new MySQL_Cursor(&conn);
     if (conn.connected())
       cursor->execute(INSERT_SQL);
