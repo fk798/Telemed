@@ -2,15 +2,15 @@
 #include <MySQL_Connection.h>
 #include <MySQL_Cursor.h>
 // MySQL Connection Start ----------------------
-IPAddress server_addr(192,168,1,236);  // IP of the MySQL *server* here
+IPAddress server_addr();  // IP of the MySQL *server* here
 char user[] = "arduino";
 char password[] = "password";
 
 bool stop = false;
 
 // WiFi card example
-char ssid[] = "786";         // your SSID
-char pass[] = "SKBKFKFKFK786";     // your SSID Password
+char ssid[] = "";         // your SSID
+char pass[] = "";     // your SSID Password
 
 WiFiClient client;                 // Use this for WiFi instead of EthernetClient
 MySQL_Connection conn(&client);
